@@ -20,7 +20,7 @@ const HatsPage = () => (
 function App() {
   // This block of code uses switch and route from the react-router-dom library
   // '/' is the base url, whatever that may be in match.url from the browser
-  // '/...' is match.url + linkUrl from the component. This is how url routing works
+  // '/...' is match.url + linkUrl from the component. This is how url routing
   return <div>
     <Switch>
       <Route exact path='/' component={HomePage} />
