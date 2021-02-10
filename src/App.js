@@ -4,17 +4,12 @@ import {Switch, Route} from 'react-router-dom';
 
 // component imports
 import HomePage from './pages/homepage/homepage.component'
+import ShopPage from './pages/shop/shop.component'
 
 // styles imports
 import './App.css';
 
-// HatsPage is a fuctions rather than a class as it does not need to make use of this.state
-// This will be seperated into it's own script in later versions
-const HatsPage = () => (
-  <div>
-    <h1>HATS PAGE</h1>
-  </div>
-);
+
 
 // HatsPage is a fuctions rather than a class as it does not need to make use of this.state
 function App() {
@@ -24,7 +19,7 @@ function App() {
   return <div>
     <Switch>
       <Route exact path='/' component={HomePage} />
-      <Route path='/hats' component={HatsPage} />
+      <Route path='/shop' component={ShopPage} />
     </Switch>
   </div>;
 }

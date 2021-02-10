@@ -12,7 +12,7 @@ class Directory extends React.Component {
     constructor() {
         super();
         
-        // this.state is where the data for the shop will be held
+        // this.state is where the data for the directory will be held
         this.state = {
             sections: 
             [
@@ -54,7 +54,7 @@ class Directory extends React.Component {
 
     render () {
         return (
-            // this block of code deconstructs the data from state.sections and passes it to a menu item component
+            // this block of code deconstructs the data from state.sections and parses it to a menu item component
             // that is constructed for each item within the sections array
             <div className='directory-menu'>
                 {this.state.sections.map(({id, ...otherSectionProps}) => (
