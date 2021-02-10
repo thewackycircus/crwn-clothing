@@ -11,6 +11,7 @@ import './header.styles.scss';
 // Header is a fuctions rather than a class as it does not need to make use of this.state
 // and instead is parsed props
 const Header = () => (
+    // This code creates a logo within a link tag and two more links. These are used to navigate the different pages
     <div className='header'>
         <Link className='logo-container' to="/">
             <Logo className='logo' />

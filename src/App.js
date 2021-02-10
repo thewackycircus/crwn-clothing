@@ -17,6 +17,7 @@ function App() {
   // This block of code uses switch and route from the react-router-dom library
   // '/' is the base url, whatever that may be in match.url from the browser
   // '/...' is match.url + linkUrl from the component. This is how url routing
+  // header is nested outside of the switch statement because it needs to be rendered on every page
   return <div>
     <Header />
     <Switch>
