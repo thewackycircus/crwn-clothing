@@ -8,6 +8,7 @@ import MenuItem from '../menu-item/menu-item.component';
 import './directory.styles.scss';
 
 // Directory is a class rather than a funciton as it needs to make use of state from the react.component library
+// It uses this.state to hold data used by MenuItem components
 class Directory extends React.Component {
     constructor() {
         super();

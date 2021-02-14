@@ -8,6 +8,7 @@ import CollectionPreview from '../../components/collection-preview/collection-pr
 import SHOP_DATA from './shop.data';
 
 // ShopPage is a class rather than a funciton as it needs to make use of state from the react.component library
+// It uses this.state to store data imported form shop.data
 class ShopPage extends React.Component {
     constructor(props) {
         super(props);

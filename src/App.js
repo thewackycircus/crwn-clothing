@@ -3,14 +3,13 @@ import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 
 // component imports
-import HomePage from './pages/homepage/homepage.component'
-import ShopPage from './pages/shop/shop.component'
-import Header from './components/header/header.component.jsx'
+import HomePage from './pages/homepage/homepage.component';
+import ShopPage from './pages/shop/shop.component';
+import SignInAndSignOutPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import Header from './components/header/header.component';
 
 // styles imports
 import './App.css';
-
-
 
 // HatsPage is a fuctions rather than a class as it does not need to make use of this.state
 function App() {
@@ -23,6 +22,7 @@ function App() {
     <Switch>
       <Route exact path='/' component={HomePage} />
       <Route path='/shop' component={ShopPage} />
+      <Route path='/signin' component={SignInAndSignOutPage} />
     </Switch>
   </div>;
 }
