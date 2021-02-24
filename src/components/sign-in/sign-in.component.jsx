@@ -1,6 +1,9 @@
 // library imports
 import React from 'react';
 
+// firebase imports
+import {signInWithGoogle} from '../../firebase/firebase.utils';
+
 // component imports
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
@@ -25,6 +28,7 @@ class SignIn extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
 
+        // sets each field to an empty string
         this.setState({email:'', password:''});
     }
 
@@ -63,7 +67,12 @@ class SignIn extends React.Component {
                         label='password' 
                         required 
                     />
-                    <CustomButton type='submit'>SignIn</CustomButton>
+                    <div className='buttons'>
+                        <CustomButton type='submit'>Sign In</CustomButton>
+                        <CustomButton onClick ={signInWithGoogle} isGoogleSignIn>
+                            Sign In With Google
+                        </CustomButton>
+                    </div>
                 </form>
             </div>
         )
