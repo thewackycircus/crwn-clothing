@@ -1,6 +1,6 @@
 // library imports
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 // firebase imports
@@ -60,18 +60,33 @@ class App extends React.Component {
     // '/' is the base url, whatever that may be in match.url from the browser
     // '/...' is match.url + linkUrl from the component. This is how url routing
     // header is nested outside of the switch statement because it needs to be rendered on every page
+    // signin page is only displayed if this.props.currentUSer returns null
     return (
     <div>
       <Header/>
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/shop' component={ShopPage} />
-        <Route path='/signin' component={SignInAndSignOutPage} />
+        <Route 
+          exact 
+          path='/signin' 
+          render={() => 
+            this.props.currentUser ? (
+              <Redirect to='/'/> 
+            ) : (
+              <SignInAndSignOutPage/>
+            )
+          } 
+        />
       </Switch>
     </div>
     );
   }
 }
+
+const mapStateToProps = ({user}) => ({
+  currentUser: user.currentUser
+})
 
 // this returns props
 const mapDispatchToProps = dispatch => ({
@@ -79,5 +94,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 // This exports App with 
-// null is in place of mapStateToProps because the App script does not need to be able to read the state
-export default connect(null, mapDispatchToProps)(App); 
+// mapStateToProps because the App script needs to be able to read the state
+export default connect(mapStateToProps, mapDispatchToProps)(App); 
