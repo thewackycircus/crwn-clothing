@@ -1,6 +1,7 @@
 //library imports
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 // firebase imports
 import {auth} from '../../firebase/firebase.utils';
@@ -41,4 +42,10 @@ const Header = ({currentUser}) => (
     </div>
 );
 
-export default Header;
+// This gets props from the root-reducer
+const mapStateToProps = state => ({
+    currentUser: state.user.currentUser
+});
+
+// This exports header with currentUser prop from mapStateToProps
+export default connect(mapStateToProps)(Header); 

@@ -1,9 +1,13 @@
 // library imports
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 // firebase imports
 import {auth, createUserProfileDocument} from './firebase/firebase.utils';
+
+// redux imports
+import {setCurrentUser} from './redux/user/user.actions';
 
 // component imports
 import HomePage from './pages/homepage/homepage.component';
@@ -17,40 +21,31 @@ import './App.css';
 // App is a class rather than a function as it needs to make use of this.state
 // this.state is used to store user profiles
 class App extends React.Component {
-  constructor() {
-    super();
-
-    // this.state is where the user profile data will be stored
-    this.state = {
-      currentUser: null
-    }
-  }
 
   unsubscribeFromAuth = null;
 
   // This block of code sets this.state.currentUser to user which is part of firebase's onAuthStateChanged function
   // componentDidmount is called when the webpage is loaded and elemtns or mounted onto the webpage
   componentDidMount() {
+    // saving this.props as setCurrentUser
+    const {setCurrentUser} = this.props;
     // onAuthStateChanged adds an observer for changes to the user's signin state
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       // if the user is logging in (userAuth != null)
       if (userAuth) {
-        // Finds userAuth or creates one if none exist
+        // Finds userAuth or create one if none exist
         const userRef = await createUserProfileDocument(userAuth);
 
         // setting this.state to the snapshot of userRef data
         userRef.onSnapshot(snapshot => {
-          this.setState({
-            currentUser: {
-              id: snapshot.id,
-              ...snapshot.data()
-            }
-          });
-
-          console.log(this.state);
+          setCurrentUser({
+            id: snapshot.id,
+            ...snapshot.data()
+          })
         });
       }
-      this.setState({currentUser: userAuth});
+
+      setCurrentUser(userAuth);
     });
   }
 
@@ -67,7 +62,7 @@ class App extends React.Component {
     // header is nested outside of the switch statement because it needs to be rendered on every page
     return (
     <div>
-      <Header currentUser={this.state.currentUser}/>
+      <Header/>
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/shop' component={ShopPage} />
@@ -78,4 +73,11 @@ class App extends React.Component {
   }
 }
 
-export default App;
+// this returns props
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+// This exports App with 
+// null is in place of mapStateToProps because the App script does not need to be able to read the state
+export default connect(null, mapDispatchToProps)(App); 
